@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 const SearchArea = () => {
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
@@ -8,7 +9,7 @@ const SearchArea = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (area === "") {
-      toast.error("Precisa de digitar uma zona.");
+      toast.error("Precisa de escolher uma zona.");
     } else {
       navigate(`/explore/${area}`);
     }
@@ -28,6 +29,7 @@ const SearchArea = () => {
             className="input-text padding-3"
             value={area}
             onChange={onChange}
+            autoComplete="true"
           />
 
           <button type="submit">Procurar</button>

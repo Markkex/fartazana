@@ -8,7 +8,7 @@ const SearchArea = () => {
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (area === "") {
-      toast.error("You need to chose your area for your order");
+      toast.error("Precisa de digitar uma zona.");
     } else {
       navigate(`/explore/${area}`);
     }
@@ -20,7 +20,7 @@ const SearchArea = () => {
 
   return (
     <div className="search-area">
-      <div className="bold-text">Faça o seu pedido conosco!</div>
+      <div className="bold-text area-text">Faça o seu pedido conosco!</div>
       <div className="form-search-area">
         <form onSubmit={onSubmit}>
           <input

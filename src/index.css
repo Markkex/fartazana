@@ -59,17 +59,6 @@ input:focus {
   font-weight: 500;
 }
 
-.form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-}
-
-.padding-r-3 {
-  padding-right: 30px;
-}
-
 /*Pages CSS*/
 .search-area {
   background: url("./assets/jpg/lukas-blazek-f-TWhXOrLiU-unsplash.jpg")
@@ -94,6 +83,21 @@ input:focus {
   .form-search-area {
     text-align: center;
   }
+
+  .navbar {
+    display: flex;
+    justify-content: space-around;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid gray;
+  }
+  .menu-options {
+    display: flex;
+  }
+  .menu-options p {
+    padding-right: 30px;
+  }
 }
 
 /* Small screen devices (600px and above) */
@@ -112,16 +116,23 @@ input:focus {
   .form-search-area {
     text-align: center;
   }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid gray;
+  }
+  .menu-options {
+    display: flex;
+  }
+  .menu-options p {
+    padding-right: 30px;
+  }
 }
 
-/* Medium screen devices (768px and above) */
-@media only screen and (min-width: 768px) {
-}
-
-/* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) {
-}
-
-/* Extra big screen devices (1200px and above) */
-@media only screen and (min-width: 1200px) {
+/* Extra big screen devices (1000px and above) */
+@media only screen and (min-width: 1000px) {
 }

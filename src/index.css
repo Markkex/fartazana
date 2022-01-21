@@ -32,31 +32,58 @@
 /*Frameworked css*/
 button {
   padding: 11px 15px;
+  border: 1px solid black;
   border-radius: 4px;
   color: tomato;
-  background-color: white;
+  background-color: rgb(red, green, blue);
   border: none;
   text-align: center;
   text-decoration: none;
-  font-size: 23px;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 input {
   padding: 10px 15px;
-  height: 27px;
-  width: 250px;
+  height: 2rem;
+  width: 15rem;
   border-radius: 4px;
-  border: 2px solid white;
+  border: 2px solid black;
   margin: 10px;
-}
-
-input:focus {
-  border: 2px solid lightblue;
 }
 
 .bold-text {
   font-size: 46px;
   font-weight: 500;
+}
+
+.button {
+  background-color: gray;
+}
+
+.padding-top-3 {
+  padding-top: 30px;
+}
+
+.padding-bottom-3 {
+  padding-bottom: 30px;
+}
+
+.padding-right-3 {
+  padding-right: 20px;
+}
+
+.txt-align-center {
+  text-align: center;
+}
+
+.sign-in--icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.image {
+  width: 100%;
 }
 
 /*Pages CSS*/
@@ -65,6 +92,32 @@ input:focus {
     no-repeat;
   background-size: cover;
   height: 100vh;
+}
+
+.sign--container {
+  display: flex;
+}
+.info--container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid tomato;
+  border-radius: 4px;
+  text-align: center;
+  padding: 15px 0;
+  background: url("./assets/jpg/hermes-rivera-Ww8eQWjMJWk-unsplash.jpg")
+    no-repeat;
+  background-size: cover;
+  justify-content: center;
+  margin-left: 30px;
+}
+
+.credentials--container {
+  display: flex;
+  flex-direction: column;
+}
+
+.sign-in form {
+  margin: auto;
 }
 
 /* For extremely small screen devices (595px and below) */
@@ -91,12 +144,23 @@ input:focus {
     padding-top: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid gray;
+    width: 100%;
   }
   .menu-options {
     display: flex;
   }
   .menu-options p {
     padding-right: 30px;
+  }
+  .sign--container {
+    display: flex;
+    flex-direction: column;
+  }
+  .credentials--container {
+    width: 100%;
+  }
+  .info--container {
+    display: none;
   }
 }
 
@@ -130,6 +194,11 @@ input:focus {
   }
   .menu-options p {
     padding-right: 30px;
+  }
+
+  .info--container,
+  .credentials--container {
+    width: 50%;
   }
 }
 

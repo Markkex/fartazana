@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 // Pages
 import Explore from "./pages/Explore";
+import ForgotPassword from "./pages/ForgotPassword";
 import SearchArea from "./pages/SearchArea";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="/area" element={<SearchArea />} />
           <Route path="/explore/:area" element={<Explore />} />
           <Route path="/sign-in" element={<SignIn />} />

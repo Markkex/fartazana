@@ -1,16 +1,44 @@
-import { useState } from "react";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ReactComponent as VisibilityIcon } from "../assets/svg/visibilityIcon.svg";
+import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 
-import Navbar from "../components/Navbar";
 import OAuth from "../components/OAuth";
 
 const SignIn = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const { email, password } = formData;
-
   const navigate = useNavigate();
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
+  };
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+
+    try {
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredential.user) {
+        navigate("/area");
+      }
+    } catch (error) {
+      toast.error("Uma das credênciais não está correta. Tente novamente.");
+    }
+  };
 
   return (
     <div className="sign-in">
@@ -29,32 +57,45 @@ const SignIn = () => {
           </div>
         </div>
         <div className="credentials--container padding-top-3 padding-bottom-3">
-          <form>
+          <form onSubmit={onSubmit}>
             <h3 className="txt-align-center">Iniciar Sessão</h3>
             <div>
-              <input placeholder="E-mail" type="email" />
+              <input
+                placeholder="E-mail"
+                type="email"
+                id="email"
+                onChange={onChange}
+              />
             </div>
             <div>
               <input
                 placeholder="Password"
                 type={showPassword ? "text" : "password"}
+                id="password"
+                onChange={onChange}
+              />
+              <VisibilityIcon
+                onClick={() => setShowPassword((prevState) => !prevState)}
               />
             </div>
             <div className="txt-align-center">
               <button>Iniciar Sessão</button>
             </div>
           </form>
-          <div className="txt-align-center padding-top-3">
+          <div
+            className="txt-align-center padding-top-3"
+            onClick={() => navigate("forgot-password")}
+          >
             <Link to="/forgot-password">Esqueceu-se da sua password?</Link>
           </div>
         </div>
       </div>
       <div className="oath--sign-in txt-align-center padding-top-3 padding-bottom-3 ">
-        <h3>Ou inicia sessão a partir:</h3>
+        <h3>Ou inicia sessão com:</h3>
         <OAuth />
       </div>
       <div className="sign-up--container txt-align-center">
-        Se não tem conta podes criar <Link to="/sign-up">aqui</Link>
+        Se não tens conta podes criar <Link to="/sign-up">aqui!</Link>
       </div>
     </div>
   );

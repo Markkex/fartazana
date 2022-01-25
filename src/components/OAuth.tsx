@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { ReactComponent as GoogleIcon } from "../assets/svg/googleIcon.svg";
 import {
   getAuth,
@@ -44,7 +43,6 @@ const OAuth = () => {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       const credential = FacebookAuthProvider.credentialFromResult(result);
-      const accessToken = credential?.accessToken;
 
       const docRef = doc(db, "users", user.uid);
       const docSnap = await getDoc(docRef);
@@ -62,18 +60,19 @@ const OAuth = () => {
     }
   };
   return (
-    <Fragment>
+    <div className="oath--sign-in txt-align-center padding-top-3 padding-bottom-3">
+      <h3>Ou inicia sessão com:</h3>
       <FacebookIcon
         onClick={onFacebookClick}
-        className="sign-in--icon padding-right-3 padding-top-3"
+        className="sign-in--icon padding-right-3 padding-top-3 pointer"
         fill="#4267B2"
       />
 
       <GoogleIcon
-        className="sign-in--icon padding-top 3"
+        className="sign-in--icon padding-top 3 pointer"
         onClick={onGoogleClick}
       />
-    </Fragment>
+    </div>
   );
 };
 

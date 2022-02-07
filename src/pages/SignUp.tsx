@@ -1,37 +1,26 @@
-import { useState } from "react";
+import { useState, FC, useContext } from "react";
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
-import { db } from "../firebase.config";
-import { setDoc, doc, serverTimestamp, Timestamp } from "firebase/firestore";
 import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
-import firebase from "firebase";
-
-interface FormData {
-  name: string;
-  email: string;
-  password?: string;
-  timestamp?: firebase.firestore.FieldValue | firebase.firestore.Timestamp;
-}
+import FormData from "../interface/SignUp";
+import { createUser } from "../context/User/UserActions";
+import { UserContext } from "../context/User/UserContext";
 
 const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({
+    account: "Consumer",
     name: "",
     email: "",
     password: "",
+    phone: "",
+    extension: "+351",
   });
-
-  const { name, email, password } = formData;
 
   const navigate = useNavigate();
 
   const onChange = (e: any) => {
-    setFormData((prevState) => ({
+    setFormData((prevState: any) => ({
       ...prevState,
       [e.target.id]: e.target.value,
     }));
@@ -39,25 +28,8 @@ const SignUp = () => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-
     try {
-      const auth = getAuth();
-
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password!
-      );
-
-      const user = userCredential.user;
-      updateProfile(user, { displayName: name });
-
-      const formDataCopy = { ...formData };
-      delete formDataCopy.password;
-      formDataCopy.timestamp = serverTimestamp();
-
-      await setDoc(doc(db, "users", user.uid), formDataCopy);
-
+      createUser(formData);
       navigate("/");
     } catch (error) {
       toast.error("Algo correu mal ao criar a sua conta. Tente novamente");
@@ -73,7 +45,7 @@ const SignUp = () => {
         <div className="padding-top-3 padding-bottom-3 txt-align-center">
           <form onSubmit={onSubmit}>
             <h3>Cria a tua conta!</h3>
-            <div>
+            <div className="padding-top-1">
               <input
                 placeholder="Nome"
                 type="text"
@@ -81,7 +53,7 @@ const SignUp = () => {
                 onChange={onChange}
               />
             </div>
-            <div>
+            <div className="padding-top-1">
               <input
                 placeholder="E-mail"
                 type="email"
@@ -89,7 +61,22 @@ const SignUp = () => {
                 onChange={onChange}
               />
             </div>
-            <div>
+            <div className="padding-top-1">
+              <select
+                id="extension"
+                value={formData.extension}
+                onChange={onChange}
+              >
+                <option value="+351">+351</option>
+              </select>
+              <input
+                placeholder="Telemóvel"
+                type="phone"
+                id="phone"
+                onChange={onChange}
+              />
+            </div>
+            <div className="padding-top-1">
               <input
                 placeholder="Password"
                 type="password"
@@ -97,7 +84,7 @@ const SignUp = () => {
                 onChange={onChange}
               />
             </div>
-            <div>
+            <div className="padding-top-1">
               <button type="submit">Criar Conta</button>
             </div>
           </form>

@@ -90,7 +90,14 @@ const SignIn = () => {
       <OAuth />
 
       <div className="sign-up--container txt-align-center padding-top-3 padding-bottom-3">
-        <Link to="/sign-up">Cria a tua conta aqui</Link>
+        <p>
+          <Link to="/sign-up">Cria a tua conta aqui.</Link>
+        </p>
+        <p className="padding-top-3">
+          <Link to="/sign-up-company">
+            Quer publicar o seu negócio conosco? Crie já a sua conta.
+          </Link>
+        </p>
       </div>
     </div>
   );

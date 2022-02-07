@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { getAuth } from "firebase/auth";
+
+import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 
 const SearchArea = () => {
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
-
+  const auth = getAuth();
   const onSubmit = (e: any) => {
     e.preventDefault();
     if (area === "") {
@@ -21,7 +24,13 @@ const SearchArea = () => {
 
   return (
     <div className="search-area">
-      <div className="bold-text area-text">Faça o seu pedido conosco!</div>
+      <div className="logo">
+        <img src={fartazanaLogo} className="logo--settings" />
+      </div>
+      <div className="bold-text area-text">
+        Olá {auth.currentUser?.displayName}!
+      </div>
+      <div className="bold-text area-text">Vamos pedir em que zona?</div>
       <div className="form-search-area">
         <form onSubmit={onSubmit}>
           <input

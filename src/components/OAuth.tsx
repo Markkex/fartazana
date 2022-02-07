@@ -28,6 +28,7 @@ const OAuth = () => {
           name: user.displayName,
           email: user.email,
           timestamp: serverTimestamp(),
+          account: "Consumer",
         });
       }
       navigate("/area");

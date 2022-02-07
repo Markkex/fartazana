@@ -8,39 +8,29 @@ body {
   background-color: #f7f7f7;
 }
 
-@font-face {
-  font-family: "holden_trialfat";
-  src: url("./assets/fonts/holden-fat-trial-webfont.woff2") format("woff2"),
-    url("./assets/fonts/holden-fat-trial-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "holden_triallight_italic";
-  src: url("./assets/fonts/holden-light-italic-trial-webfont.woff2")
-      format("woff2"),
-    url("./assets/fonts/holden-light-italic-trial-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "holden_trialmedium";
-  src: url("./assets/fonts/holden-medium-trial-webfont.woff2") format("woff2"),
-    url("./assets/fonts/holden-medium-trial-webfont.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /*Frameworked css*/
 button {
-  padding: 11px 15px;
+  padding: 15px 15px;
   border: 1px solid black;
   border-radius: 4px;
   color: tomato;
   background-color: rgb(red, green, blue);
   border: none;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button--logout {
+  background-color: black;
+}
+
+select {
+  padding: 15px 15px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: rgb(red, green, blue);
   text-align: center;
   text-decoration: none;
   font-size: 1rem;
@@ -53,7 +43,10 @@ input {
   width: 15rem;
   border-radius: 4px;
   border: 2px solid black;
-  margin: 10px;
+}
+
+.input-disabled {
+  color: tomato;
 }
 
 .bold-text {
@@ -63,6 +56,14 @@ input {
 
 .button {
   background-color: gray;
+}
+
+.padding-2 {
+  padding: 20px;
+}
+
+.padding-top-1 {
+  padding-top: 10px;
 }
 
 .padding-top-3 {
@@ -75,6 +76,10 @@ input {
 
 .padding-right-3 {
   padding-right: 20px;
+}
+
+.margin-top-3 {
+  margin-top: 30px;
 }
 
 .txt-align-center {
@@ -90,6 +95,20 @@ input {
   cursor: pointer;
 }
 
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.card {
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.logout {
+  float: right;
+}
+
 /*Pages CSS*/
 .logo {
   width: 250px;
@@ -97,6 +116,45 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.loading-spinner--container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-spinner {
+  width: 64px;
+  height: 64px;
+  border: 8px solid;
+  border-color: #00cc66 transparent #00cc66 transparent;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.navbar {
+  background-color: white;
+}
+
+.logo-navbar {
+  height: 20px;
 }
 
 .logo--settings {
@@ -114,6 +172,7 @@ input {
   display: flex;
   width: 100%;
 }
+
 .info--container {
   display: flex;
   flex-direction: column;
@@ -147,10 +206,38 @@ input {
 
 .sign-in,
 .forgot-password,
-.sign-up {
+.sign-up,
+.search-area,
+.sign-up-companies {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.profile--container {
+  margin: 30px;
+}
+
+.options--profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+.change-details {
+  display: flex;
+  background-color: aquamarine;
+  height: 30px;
+  width: 100%;
+  align-items: center;
+  border-radius: 4px;
+  justify-content: center;
+  padding: 10px;
+}
+.sign-up-companies {
+  height: 100vh;
+}
+.companies--container--img {
+  background: url("./assets/jpg/brooke-lark-4J059aGa5s4-unsplash.jpg") no-repeat;
 }
 
 /* For extremely small screen devices (595px and below) */

@@ -4,16 +4,24 @@ import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
 
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
+import { getUser } from "../context/User/UserActions";
+import { useContext } from "react";
+import { UserContext } from "../context/User/UserContext";
 
 const SearchArea = () => {
+  const { state, dispatch } = useContext(UserContext);
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
   const auth = getAuth();
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     if (area === "") {
       toast.error("Precisa de escolher uma zona.");
     } else {
+      const userData = await getUser();
+      const user = { ...userData };
+      dispatch({ type: "GET_USER", payload: user });
+
       navigate(`/explore/${area}`);
     }
   };

@@ -1,6 +1,6 @@
 const userReducer = (state: any, action: any) => {
   switch (action.type) {
-    case "CREATE_USER_CONSUMER":
+    case "GET_USER":
       return {
         ...state,
         user: action.payload,

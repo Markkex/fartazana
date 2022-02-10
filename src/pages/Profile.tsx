@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import {
-  getAuth,
-  updateProfile,
-  updatePhoneNumber,
-  PhoneAuthProvider,
-  RecaptchaVerifier,
-} from "firebase/auth";
+import { getAuth, updateProfile } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.config";
 import FormDataProfile from "../interface/Profile";
 import { toast } from "react-toastify";
+import { updateName, updatePhone } from "../context/User/UserActions";
 
 const Profile = () => {
   const auth = getAuth();
@@ -41,39 +36,11 @@ const Profile = () => {
 
   const onSubmit = async () => {
     try {
-      const userRef = doc(db, "users", auth.currentUser?.uid!);
       if (auth.currentUser?.displayName !== name) {
-        await updateProfile(auth.currentUser!, {
-          displayName: name,
-        });
-
-        await updateDoc(userRef, {
-          name: name,
-        });
+        updateName(name);
       }
       if (auth.currentUser?.phoneNumber !== phone) {
-        const appVerifier = new RecaptchaVerifier(
-          "recaptcha-container",
-          {
-            size: "invisible",
-            callback: (response: any) => {
-              console.log("callback", response);
-            },
-          },
-          auth
-        );
-
-        const phoneProvider = new PhoneAuthProvider(auth);
-        const id = await phoneProvider.verifyPhoneNumber(phone!, appVerifier);
-        const code = window.prompt(
-          "Por favor insira o código enviado para o seu telemóvel."
-        );
-        const credentials = PhoneAuthProvider.credential(id, code!);
-
-        await updatePhoneNumber(auth.currentUser!, credentials);
-        console.log("phone number changed", id, credentials, auth.currentUser);
-
-        await updateDoc(userRef, { phone: phone });
+        updatePhone(phone);
       }
       toast.success("Atualização de dados bem sucedida");
     } catch (error) {

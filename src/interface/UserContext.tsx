@@ -2,7 +2,7 @@ export default interface InitialState {
   user: any;
 }
 export type Action = {
-  type: "CREATE_USER_CONSUMER";
+  type: "GET_USER";
   payload: any;
 };
 

@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
 import FormData from "../interface/SignUp";
-import { createUser } from "../context/User/UserActions";
-import { UserContext } from "../context/User/UserContext";
+import { createUser } from "../State/action-creators/user/UserActions";
+import { UserContext } from "../State/User/UserContext";
 
 const SignUp = () => {
   const [formData, setFormData] = useState<FormData>({

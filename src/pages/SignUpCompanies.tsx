@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
-import { createUser } from "../context/User/UserActions";
+import { createUser } from "../State/action-creators/user/UserActions";
 import FormData from "../interface/SignUpCompanies";
 const SignUpCompanies = () => {
   const navigate = useNavigate();

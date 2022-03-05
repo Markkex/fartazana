@@ -3,16 +3,23 @@ import Navbar from "../components/Navbar";
 import { getAuth, updateProfile } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
-import { updateDoc, doc } from "firebase/firestore";
-import { db } from "../firebase.config";
 import FormDataProfile from "../interface/Profile";
 import { toast } from "react-toastify";
-import { updateName, updatePhone } from "../context/User/UserActions";
+import {
+  getUser,
+  updateName,
+  updatePhone,
+} from "../State/action-creators/user/UserActions";
+import { useContext } from "react";
+import { UserContext } from "../State/User/UserContext";
+import { useEffect } from "react";
+import Spinner from "../components/Spinner";
 
 const Profile = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-
+  const { state, dispatch } = useContext(UserContext);
+  const [loading, setLoading] = useState(true);
   const [changeDetails, setChangeDetails] = useState<boolean>(false);
   const [formData, setFormData] = useState<FormDataProfile>({
     name: auth.currentUser?.displayName,
@@ -22,10 +29,24 @@ const Profile = () => {
 
   const { name, email, phone } = formData;
 
+  useEffect(() => {
+    const getUserCredentials = async () => {
+      const getUserData = await getUser();
+      dispatch({ type: "GET_USER", payload: getUserData });
+    };
+    getUserCredentials();
+    setLoading(false);
+    console.log(state.user);
+  }, [auth]);
+
   const logout = () => {
     auth.signOut();
     navigate("/");
   };
+
+  if (loading === true) {
+    <Spinner />;
+  }
 
   const onChange = (e: any) => {
     setFormData((prevState: any) => ({
@@ -67,7 +88,7 @@ const Profile = () => {
                   setChangeDetails((prevState) => !prevState);
                 }}
               >
-                {changeDetails ? "Concluir alterações" : "Mudar Informações"}{" "}
+                {changeDetails ? "Concluir alterações" : "Mudar Informações"}
               </p>
             </div>
             <div className="logout">
@@ -114,6 +135,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      {loading === false && state.user?.account === "Commerce" && (
+        <div>cenas</div>
+      )}
     </div>
   );
 };

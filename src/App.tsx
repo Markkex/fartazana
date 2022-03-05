@@ -14,7 +14,7 @@ import SignIn from "./pages/SignIn";
 import SignUpCompanies from "./pages/SignUpCompanies";
 import SignUp from "./pages/SignUp";
 
-import { UserProvider } from "./context/User/UserContext";
+import { UserProvider } from "./State/User/UserContext";
 
 function App() {
   return (

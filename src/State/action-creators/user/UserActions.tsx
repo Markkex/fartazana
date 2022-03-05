@@ -6,7 +6,7 @@ import {
   PhoneAuthProvider,
   RecaptchaVerifier,
 } from "firebase/auth";
-import { db } from "../../firebase.config";
+import { db } from "../../../firebase.config";
 import {
   setDoc,
   doc,
@@ -71,7 +71,7 @@ export const createUser = async (user: any) => {
   delete formDataCopy.password;
   delete formDataCopy.extension;
   formDataCopy.timestamp = serverTimestamp();
-  console.log(formDataCopy);
+  updatePhone(formDataCopy.phone);
   if (user.account === "Commercial") {
     await setDoc(doc(db, "restaurants", userData.uid), formDataCopy);
   } else {

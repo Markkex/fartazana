@@ -1,27 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
 
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
-import { getUser } from "../context/User/UserActions";
+import { getUser } from "../State/action-creators/user/UserActions";
 import { useContext } from "react";
-import { UserContext } from "../context/User/UserContext";
+import { UserContext } from "../State/User/UserContext";
 
 const SearchArea = () => {
-  const { state, dispatch } = useContext(UserContext);
+  const auth = getAuth();
+  const { dispatch } = useContext(UserContext);
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
-  const auth = getAuth();
+
+  useEffect(() => {
+    const getUserCredentials = async () => {
+      const userData = await getUser();
+      dispatch({ type: "GET_USER", payload: userData });
+    };
+    getUserCredentials();
+  }, [auth]);
+
   const onSubmit = async (e: any) => {
     e.preventDefault();
     if (area === "") {
       toast.error("Precisa de escolher uma zona.");
     } else {
-      const userData = await getUser();
-      const user = { ...userData };
-      dispatch({ type: "GET_USER", payload: user });
-
       navigate(`/explore/${area}`);
     }
   };
@@ -48,7 +53,6 @@ const SearchArea = () => {
             onChange={onChange}
             autoComplete="true"
           />
-
           <button type="submit">Procurar</button>
         </form>
       </div>

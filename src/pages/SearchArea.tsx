@@ -4,15 +4,17 @@ import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
 
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
-import { getUser } from "../State/action-creators/user/UserActions";
+import { getUser } from "../State/User/UserActionsCreators";
 import { useContext } from "react";
-import { UserContext } from "../State/User/UserContext";
-
+import { useSelector, useDispatch } from "react-redux";
+import { UserState } from "../State/User/UserReducer";
 const SearchArea = () => {
   const auth = getAuth();
-  const { dispatch } = useContext(UserContext);
+
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state: UserState) => state.user);
 
   useEffect(() => {
     const getUserCredentials = async () => {

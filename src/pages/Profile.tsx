@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, FC } from "react";
 import Navbar from "../components/Navbar";
 import { getAuth, updateProfile } from "firebase/auth";
 
 import { useNavigate } from "react-router-dom";
-import FormDataProfile from "../interface/Profile";
 import { toast } from "react-toastify";
 import {
   getUser,
   updateName,
   updatePhone,
-} from "../State/action-creators/user/UserActions";
-import { useContext } from "react";
-import { UserContext } from "../State/User/UserContext";
+} from "../State/User/UserActionsCreators";
 import { useEffect } from "react";
 import Spinner from "../components/Spinner";
+import { useSelector, useDispatch } from "react-redux";
+import { UserState } from "../State/User/UserReducer";
 
-const Profile = () => {
+const Profile: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
-  const { state, dispatch } = useContext(UserContext);
+  const dispatch = useDispatch();
+  const user = useSelector((state: UserState) => state.user);
   const [loading, setLoading] = useState(true);
   const [changeDetails, setChangeDetails] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormDataProfile>({
+  const [formData, setFormData] = useState({
     name: auth.currentUser?.displayName,
     email: auth.currentUser?.email,
     phone: auth.currentUser?.phoneNumber,
@@ -36,7 +36,7 @@ const Profile = () => {
     };
     getUserCredentials();
     setLoading(false);
-    console.log(state.user);
+    console.log(user);
   }, [auth]);
 
   const logout = () => {
@@ -135,9 +135,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      {loading === false && state.user?.account === "Commerce" && (
-        <div>cenas</div>
-      )}
     </div>
   );
 };

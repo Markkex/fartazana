@@ -2,20 +2,20 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
-import { createUser } from "../State/action-creators/user/UserActions";
-import FormData from "../interface/SignUpCompanies";
+import { createUser } from "../State/User/UserActionsCreators";
+
 const SignUpCompanies = () => {
   const navigate = useNavigate();
   const options = [{ value: "+351", name: "PT +351" }];
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     account: "Commercial",
     name: "",
     email: "",
     phone: "",
+    address: "",
+    establishmentName: "",
     extension: "+351",
     password: "",
-    establishmentName: "",
-    address: "",
     location: "",
   });
 

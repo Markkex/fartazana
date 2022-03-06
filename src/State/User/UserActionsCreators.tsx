@@ -6,7 +6,7 @@ import {
   PhoneAuthProvider,
   RecaptchaVerifier,
 } from "firebase/auth";
-import { db } from "../../../firebase.config";
+import { db } from "../../firebase.config";
 import {
   setDoc,
   doc,

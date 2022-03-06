@@ -3,12 +3,10 @@ import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
-import FormData from "../interface/SignUp";
-import { createUser } from "../State/action-creators/user/UserActions";
-import { UserContext } from "../State/User/UserContext";
+import { createUser } from "../State/User/UserActionsCreators";
 
 const SignUp = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState({
     account: "Consumer",
     name: "",
     email: "",

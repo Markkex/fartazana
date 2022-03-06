@@ -1,4 +1,4 @@
-import { UserActionType } from "../action-types/UserTypes";
+import { UserActionType } from "./UserActionTypes";
 
 interface GetUserAction {
   type: UserActionType.GET_USER;

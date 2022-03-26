@@ -1,7 +1,6 @@
 import React, { useState, FC } from "react";
 import Navbar from "../components/Navbar";
-import { getAuth, updateProfile } from "firebase/auth";
-
+import { getAuth, User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -11,23 +10,22 @@ import {
 } from "../State/User/UserActionsCreators";
 import { useEffect } from "react";
 import Spinner from "../components/Spinner";
-import { useSelector, useDispatch } from "react-redux";
-import { UserState } from "../State/User/UserReducer";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profile: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: UserState) => state.user);
+  const user = useSelector((state: any) => state.user.user);
   const [loading, setLoading] = useState(true);
   const [changeDetails, setChangeDetails] = useState<boolean>(false);
   const [formData, setFormData] = useState({
-    name: auth.currentUser?.displayName,
-    email: auth.currentUser?.email,
-    phone: auth.currentUser?.phoneNumber,
+    formDataName: auth.currentUser?.displayName,
+    formDataEmail: auth.currentUser?.email,
+    formDataPhone: auth.currentUser?.phoneNumber,
   });
 
-  const { name, email, phone } = formData;
+  const { formDataName, formDataEmail, formDataPhone } = formData;
 
   useEffect(() => {
     const getUserCredentials = async () => {
@@ -36,7 +34,6 @@ const Profile: FC = () => {
     };
     getUserCredentials();
     setLoading(false);
-    console.log(user);
   }, [auth]);
 
   const logout = () => {
@@ -44,7 +41,7 @@ const Profile: FC = () => {
     navigate("/");
   };
 
-  if (loading === true) {
+  if (loading) {
     <Spinner />;
   }
 
@@ -57,11 +54,11 @@ const Profile: FC = () => {
 
   const onSubmit = async () => {
     try {
-      if (auth.currentUser?.displayName !== name) {
-        updateName(name);
+      if (auth.currentUser?.displayName !== formDataName) {
+        updateName(formDataName);
       }
-      if (auth.currentUser?.phoneNumber !== phone) {
-        updatePhone(phone);
+      if (auth.currentUser?.phoneNumber !== formDataPhone) {
+        updatePhone(formDataPhone);
       }
       toast.success("Atualização de dados bem sucedida");
     } catch (error) {
@@ -69,7 +66,6 @@ const Profile: FC = () => {
       console.log(error);
     }
   };
-
   return (
     <div>
       <Navbar />
@@ -105,7 +101,7 @@ const Profile: FC = () => {
               <input
                 className={!changeDetails ? "input" : "input-disabled"}
                 disabled={!changeDetails}
-                value={name!}
+                value={formDataName!}
                 id="name"
                 onChange={onChange}
               />
@@ -121,7 +117,7 @@ const Profile: FC = () => {
 
               <input
                 disabled={!changeDetails}
-                value={phone!}
+                value={formDataPhone!}
                 id="phone"
                 onChange={onChange}
               />
@@ -130,11 +126,12 @@ const Profile: FC = () => {
               <p>
                 <label htmlFor="email">E-mail</label>
               </p>
-              <input value={email!} disabled />
+              <input value={formDataEmail!} disabled />
             </div>
           </div>
         </div>
       </div>
+      {user.account === "Commercial" && <div>Cenas</div>}
     </div>
   );
 };

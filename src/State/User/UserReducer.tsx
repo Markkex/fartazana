@@ -1,22 +1,13 @@
 import { UserActionType } from "./UserActionTypes";
 import { Action } from "./UserActions";
+import { UserState } from "../../types/inteface";
 
-interface User {
-  account: string;
-  name: string;
-  email: string;
-  phone: string;
-}
-
-export interface UserState {
-  user: User[];
-}
-
-const initialState = {
+const initialState: UserState = {
   user: [],
+  language: "",
 };
 
-const userReducer = (state: UserState = initialState, action: Action) => {
+const userReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case UserActionType.GET_USER:
       return {

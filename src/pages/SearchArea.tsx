@@ -5,16 +5,15 @@ import { getAuth } from "firebase/auth";
 
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 import { getUser } from "../State/User/UserActionsCreators";
-import { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { UserState } from "../State/User/UserReducer";
+
 const SearchArea = () => {
   const auth = getAuth();
 
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: UserState) => state.user);
+  const user = useSelector((state: any) => state.user.user);
 
   useEffect(() => {
     const getUserCredentials = async () => {
@@ -43,7 +42,7 @@ const SearchArea = () => {
         <img src={fartazanaLogo} className="logo--settings" />
       </div>
       <div className="bold-text area-text">
-        Olá {auth.currentUser?.displayName}!
+        <p>Olá {auth?.currentUser?.displayName}</p>
       </div>
       <div className="bold-text area-text">Vamos pedir em que zona?</div>
       <div className="form-search-area">

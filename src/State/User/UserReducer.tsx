@@ -1,6 +1,6 @@
 import { UserActionType } from "./UserActionTypes";
 import { Action } from "./UserActions";
-import { UserState } from "../../types/inteface";
+import UserState from "../../types/inteface";
 
 const initialState: UserState = {
   user: [],

@@ -5,4 +5,9 @@ interface GetUserAction {
   payload: [];
 }
 
-export type Action = GetUserAction;
+interface GetUserLanguage {
+  type: UserActionType.GET_LANGUAGE;
+  payload: string;
+}
+
+export type Action = GetUserAction | GetUserLanguage;

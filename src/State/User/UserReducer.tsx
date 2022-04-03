@@ -14,6 +14,11 @@ const userReducer = (state = initialState, action: Action) => {
         ...state,
         user: action.payload,
       };
+    case UserActionType.GET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload,
+      };
     default:
       return { ...state };
   }

@@ -3,8 +3,8 @@ import { Action } from "./UserActions";
 import UserState from "../../types/inteface";
 
 const initialState: UserState = {
-  user: [],
-  language: "",
+  user: undefined,
+  language: "pt",
 };
 
 const userReducer = (state = initialState, action: Action) => {

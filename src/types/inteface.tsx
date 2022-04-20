@@ -6,6 +6,6 @@ interface User {
 }
 
 export default interface UserState {
-  user: User[];
+  user: User[] | undefined;
   language: string;
 }

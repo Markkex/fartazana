@@ -1,16 +1,18 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useTranslation } from "react-i18next";
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 
 import OAuth from "../components/OAuth";
+import { Button, Input, TextField } from "@mui/material";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const { email, password } = formData;
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevState) => ({
@@ -40,48 +42,36 @@ const SignIn = () => {
 
   return (
     <div className="sign-in">
-      <div className="logo">
-        <img src={fartazanaLogo} className="logo--settings" />
-      </div>
-      <div className="sign--container padding-top-3">
-        <div className="info--container ">
-          <div>
-            <h3>Sem tempo para ir ao restaurante?</h3>
-            <br />
-            <p>Pode pedir aqui!</p>
-            <p>Basta criares uma conta ou fazeres log in.</p>
-            <p>Escolheres a tua área de residência.</p>
-            <p>Escolheres o restaurante e a refeição.</p>
-            <p>Faz o pagamento.</p>
-            <p>E já está!</p>
+      <div className="padding-top-3">
+        <div className="padding-top-3 padding-bottom-3">
+          <h3 className="txt-align-center">{t("text.login")}</h3>
+          <div className="padding-top-3">
+            <TextField
+              label="E-mail"
+              type="email"
+              id="email"
+              onChange={onChange}
+              variant="outlined"
+            />
           </div>
-        </div>
-        <div className="credentials--container padding-top-3 padding-bottom-3">
-          <form onSubmit={onSubmit}>
-            <h3 className="txt-align-center">Iniciar Sessão</h3>
-            <div>
-              <input
-                placeholder="E-mail"
-                type="email"
-                id="email"
-                onChange={onChange}
-              />
-            </div>
-            <div>
-              <input
-                placeholder="Password"
-                type="password"
-                id="password"
-                onChange={onChange}
-              />
-            </div>
-            <div className="txt-align-center">
-              <button>Iniciar Sessão</button>
-            </div>
-          </form>
+          <div className="padding-top-3">
+            <TextField
+              label="Password"
+              type="password"
+              id="password"
+              onChange={onChange}
+              variant="outlined"
+            />
+          </div>
+          <div className="txt-align-center padding-top-3">
+            <Button onClick={onSubmit} variant="contained">
+              {t("text.login")}
+            </Button>
+          </div>
+
           <div className="txt-align-center padding-top-3">
             <div>
-              <Link to="/forgot-password">Esqueceu-se da password?</Link>
+              <Link to="/forgot-password">{t("text.forgotPassword")}</Link>
             </div>
           </div>
         </div>
@@ -91,12 +81,10 @@ const SignIn = () => {
 
       <div className="sign-up--container txt-align-center padding-top-3 padding-bottom-3">
         <p>
-          <Link to="/sign-up">Cria a tua conta aqui.</Link>
+          <Link to="/sign-up">{t("text.createAccount")}</Link>
         </p>
         <p className="padding-top-3">
-          <Link to="/sign-up-company">
-            Quer publicar o seu negócio conosco? Crie já a sua conta.
-          </Link>
+          <Link to="/sign-up-company">{t("text.signInCompanies")}</Link>
         </p>
       </div>
     </div>

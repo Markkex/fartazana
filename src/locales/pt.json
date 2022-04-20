@@ -1,3 +1,37 @@
 {
+    "text": {
+        "forgotPassword" : "Esqueceu a sua password?", 
+        "returnToMenu": "Voltar à Página Inicial.",
+        "personalDetails": "Detalhes Pessoais", 
+        "name": "Nome",
+        "phone": "Telemóvel",
+        "address": "Morada", 
+        "establishmentName": "Nome do Estabelecimento",
+        "areaOfResidence" : "Escolha a sua área de residência", 
+        "login" : "Iniciar Sessão", 
+        "forgotPassword":"Esqueceu a sua password?", 
+        "createAccount": "Cria a tua conta aqui.", 
+        "areaRequest": "Vamos pedir em que zona?",
+        "hello": "Olá ", 
+        "signInCompanies": "Quer publicar o seu negócio conosco? Crie já a sua conta." , 
+        "createAccount": "Cria a tua conta", 
+        "returnToLogin": "Voltar à página inicial", 
+        "commerceCreate": "Cria conta para o teu comércio!"
+        
+        
+    }, 
+    "button": {
+        "recover": "Recuperar", 
+        "changeInformations": "Mudar Informações",
+        "updateInformations": "Atualizar Informações", 
+        "search":"Procurar", 
+        "submit": "Submeter"
+    }, 
+    "messages": {
+        "updateComplete": "Atualização de dados bem sucedida.", 
+        "failedUpdate": "Não foi possivel atualizar os dados.", 
+        "selectZone": "Precisa de escolher uma zona.", 
+        "generalError": "Ocorreu um erro. Por favor tente novamente."
+    }
     
 }

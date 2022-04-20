@@ -3,10 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
+import { Button, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { width } from "@mui/system";
+import Navbar from "../components/Navbar";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState<string>("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const onChange = (e: any) => {
     setEmail(e.target.value);
   };
@@ -26,21 +31,25 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password">
-      <div className="logo">
-        <img src={fartazanaLogo} className="logo--settings" />
-      </div>
-      <h1 className="padding-top-3">Esqueceu a sua password?</h1>
+      <h1 className="padding-top-3">{t("text.forgotPassword")}</h1>
       <div className="padding-top-3">
-        <form onSubmit={onSubmit}>
-          <div className="text-align-center">
-            <input onChange={onChange} placeholder="E-mail" />
-          </div>
-          <div className="txt-align-center padding-top-3">
-            <button type="submit">Recuperar</button>
-          </div>
-        </form>
+        <div className="text-align-center">
+          <TextField
+            id="email"
+            label="E-mail"
+            variant="outlined"
+            onChange={onChange}
+            style={{ width: "300px" }}
+          />
+        </div>
+        <div className="txt-align-center padding-top-3">
+          <Button variant="contained" onClick={onSubmit}>
+            {t("button.recover")}
+          </Button>
+        </div>
+
         <div className="padding-top-3">
-          <Link to="/">Voltar ao menu inicial.</Link>
+          <Link to="/">{t("text.returnToMenu")}</Link>
         </div>
       </div>
     </div>

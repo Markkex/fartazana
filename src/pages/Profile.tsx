@@ -11,11 +11,14 @@ import {
 import { useEffect } from "react";
 import Spinner from "../components/Spinner";
 import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Button, TextField } from "@mui/material";
 
 const Profile: FC = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const user = useSelector((state: any) => state.user.user);
   const [loading, setLoading] = useState(true);
   const [changeDetails, setChangeDetails] = useState<boolean>(false);
@@ -60,74 +63,76 @@ const Profile: FC = () => {
       if (auth.currentUser?.phoneNumber !== formDataPhone) {
         updatePhone(formDataPhone);
       }
-      toast.success("Atualização de dados bem sucedida");
+      toast.success(t("messages.updateComplete"));
     } catch (error) {
-      toast.error(`${error}`);
-      console.log(error);
+      toast.error(t("messages.failedUpdate"));
     }
   };
   return (
     <div>
-      <Navbar />
       <div id="recaptcha-container"></div>
       <header>
-        <h1 className="txt-align-center padding-top-3">Detalhes Pessoais</h1>
+        <h1 className="txt-align-center padding-top-3">
+          {t("text.personalDetails")}
+        </h1>
       </header>
       <div className="container">
         <div>
           <div className="options--profile">
             <div>
-              <p
-                className="change-details"
+              <Button
+                variant={changeDetails ? "contained" : "outlined"}
+                color={changeDetails ? "success" : "primary"}
                 onClick={() => {
                   changeDetails && onSubmit();
                   setChangeDetails((prevState) => !prevState);
                 }}
               >
-                {changeDetails ? "Concluir alterações" : "Mudar Informações"}
-              </p>
+                {changeDetails
+                  ? t("button.updateInformations")
+                  : t("button.changeInformations")}{" "}
+              </Button>
             </div>
             <div className="logout">
-              <button onClick={logout} className="button--logout">
+              <Button onClick={logout} variant="outlined" color="error">
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
-          <div className="card margin-top-3 padding-2">
-            <div className="padding-top-3">
-              <p>
-                <label htmlFor="name">Nome</label>
-              </p>
-              <input
-                className={!changeDetails ? "input" : "input-disabled"}
-                disabled={!changeDetails}
-                value={formDataName!}
-                id="name"
-                onChange={onChange}
-              />
-            </div>
 
-            <div className="padding-top-1">
-              <p>
-                <label htmlFor="phone">Telemóvel</label>
-              </p>
-              <p>
-                {changeDetails && "Se não tiver, por favor indicar indicativo"}
-              </p>
+          <div className="padding-top-3">
+            <TextField
+              id="formDataName"
+              label={t("text.name")}
+              variant="outlined"
+              value={formDataName!}
+              disabled={!changeDetails}
+              onChange={onChange}
+            />
+          </div>
 
-              <input
-                disabled={!changeDetails}
-                value={formDataPhone!}
-                id="phone"
-                onChange={onChange}
-              />
-            </div>
-            <div className="padding-top-1">
-              <p>
-                <label htmlFor="email">E-mail</label>
-              </p>
-              <input value={formDataEmail!} disabled />
-            </div>
+          <div className="padding-top-3">
+            <p>
+              {changeDetails && "Se não tiver, por favor indicar indicativo"}
+            </p>
+
+            <TextField
+              id="formDataPhone"
+              label={t("text.phone")}
+              variant="outlined"
+              value={formDataPhone!}
+              disabled={!changeDetails}
+            />
+          </div>
+          <div className="padding-top-3">
+            <TextField
+              id="formDataEmail"
+              label="E-mail"
+              variant="outlined"
+              value={formDataEmail!}
+              disabled
+              onChange={onChange}
+            />
           </div>
         </div>
       </div>

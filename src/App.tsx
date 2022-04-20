@@ -13,22 +13,22 @@ import SearchArea from "./pages/SearchArea";
 import SignIn from "./pages/SignIn";
 import SignUpCompanies from "./pages/SignUpCompanies";
 import SignUp from "./pages/SignUp";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <Fragment>
       <Router>
+        <Navbar />
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/" element={<SearchArea />} />
-          </Route>
+          <Route path="/search-area" element={<SearchArea />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="forgot-password" element={<ForgotPassword />} />
           <Route path="/area" element={<SearchArea />} />
-          <Route path="/explore/:area" element={<Explore />} />
-          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/explore/" element={<Explore />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/sign-up-company" element={<SignUpCompanies />} />
-          <Route path="/:area/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </Router>
       <ToastContainer />

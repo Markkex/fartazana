@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getAuth } from "firebase/auth";
-
-import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 import { getUser } from "../State/User/UserActionsCreators";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Button, TextField } from "@mui/material";
 
 const SearchArea = () => {
   const auth = getAuth();
@@ -14,7 +14,7 @@ const SearchArea = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state: any) => state.user.user);
-
+  const { t } = useTranslation();
   useEffect(() => {
     const getUserCredentials = async () => {
       const userData = await getUser();
@@ -26,9 +26,9 @@ const SearchArea = () => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     if (area === "") {
-      toast.error("Precisa de escolher uma zona.");
+      toast.error(t("messages.selectZone"));
     } else {
-      navigate(`/explore/${area}`);
+      navigate(`/explore/`);
     }
   };
 
@@ -38,24 +38,28 @@ const SearchArea = () => {
 
   return (
     <div className="search-area">
-      <div className="logo">
-        <img src={fartazanaLogo} className="logo--settings" />
-      </div>
       <div className="bold-text area-text">
-        <p>Olá {auth?.currentUser?.displayName}</p>
+        <p>
+          {t("text.hello")}
+          {user?.name}
+        </p>
       </div>
-      <div className="bold-text area-text">Vamos pedir em que zona?</div>
+      <div className="bold-text area-text">{t("text.areaRequest")}</div>
       <div className="form-search-area">
-        <form onSubmit={onSubmit}>
-          <input
-            placeholder="Escolha a sua área de residência"
-            className="input-text padding-3"
-            value={area}
-            onChange={onChange}
-            autoComplete="true"
-          />
-          <button type="submit">Procurar</button>
-        </form>
+        <TextField
+          label={t("text.areaOfResidence")}
+          value={area}
+          onChange={onChange}
+          fullWidth
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          onClick={onSubmit}
+          className="padding-top-3"
+        >
+          {t("button.search")}
+        </Button>
       </div>
     </div>
   );

@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
 import { createUser } from "../State/User/UserActionsCreators";
+import { useTranslation } from "react-i18next";
+import { Button, MenuItem, Select, TextField } from "@mui/material";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ const SignUp = () => {
   });
 
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const onChange = (e: any) => {
     setFormData((prevState: any) => ({
@@ -30,60 +33,59 @@ const SignUp = () => {
       createUser(formData);
       navigate("/");
     } catch (error) {
-      toast.error("Algo correu mal ao criar a sua conta. Tente novamente");
+      toast.error(t("messages.generalError"));
     }
   };
 
   return (
     <div className="sign-up">
-      <div className="logo">
-        <img src={fartazanaLogo} className="logo--settings" />
-      </div>
       <div>
         <div className="padding-top-3 padding-bottom-3 txt-align-center">
           <form onSubmit={onSubmit}>
-            <h3>Cria a tua conta!</h3>
+            <h3>{t("text.createAccount")}</h3>
             <div className="padding-top-1">
-              <input
-                placeholder="Nome"
+              <TextField
+                label={t("text.name")}
                 type="text"
                 id="name"
                 onChange={onChange}
               />
             </div>
             <div className="padding-top-1">
-              <input
-                placeholder="E-mail"
+              <TextField
+                label="E-mail"
                 type="email"
                 id="email"
                 onChange={onChange}
               />
             </div>
             <div className="padding-top-1">
-              <select
+              <Select
                 id="extension"
                 value={formData.extension}
                 onChange={onChange}
               >
-                <option value="+351">+351</option>
-              </select>
-              <input
-                placeholder="Telemóvel"
+                <MenuItem value={formData.extension}>+351</MenuItem>
+              </Select>
+              <TextField
+                label={t("text.phone")}
                 type="phone"
                 id="phone"
                 onChange={onChange}
               />
             </div>
             <div className="padding-top-1">
-              <input
-                placeholder="Password"
+              <TextField
+                label="Password"
                 type="password"
                 id="password"
                 onChange={onChange}
               />
             </div>
             <div className="padding-top-1">
-              <button type="submit">Criar Conta</button>
+              <Button onClick={onSubmit} variant="outlined">
+                {t("text.createAccount")}
+              </Button>
             </div>
           </form>
         </div>
@@ -92,7 +94,7 @@ const SignUp = () => {
       <OAuth />
 
       <div>
-        <Link to="/">Voltar à página inicial</Link>
+        <Link to="/">{t("text.returnToLogin")}</Link>
       </div>
     </div>
   );

@@ -1,1 +1,36 @@
-{}
+{
+    "text": {
+        "forgotPassword" : "Forgot your password?", 
+        "returnToMenu": "Return to Login Page.", 
+        "personalDetails": "Personal Details", 
+        "name": "Name", 
+        "phone": "Phone number",
+        "address": "Address",
+        "establishmentName": "Establishment Name",
+        "areaOfResidence" : "Chose your living area", 
+        "login" : "Login", 
+        "forgotPassword":"Forgot your password?", 
+        "createAccount": "Create your account here", 
+        "areaRequest": "We're going to order where?",
+        "hello": "Hello ", 
+        "signInCompanies": "Wanna publish your business with us? Create your account here.", 
+        "createAccount": "Create your account", 
+        "returnToLogin": "Return to login page", 
+        "commerceCreate": "Create your account for your business!"
+        
+    }, 
+    "button": {
+        "recover": "Recover", 
+        "changeInformations": "Change Informations", 
+        "updateInformations": "Update Informations", 
+        "search":"Search", 
+        "submit": "Submeter"
+    }, 
+    "messages": {
+        "updateComplete": "Update successful.", 
+        "failedUpdate": "Oops! Something happened! Try again later.", 
+        "selectZone": "You need to choose a local.", 
+        "generalError": "Something happened. Please try again."
+    }
+    
+}

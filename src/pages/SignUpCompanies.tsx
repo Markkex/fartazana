@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import fartazanaLogo from "../assets/jpg/Fartazana-logo.png";
 import { createUser } from "../State/User/UserActionsCreators";
 import { useTranslation } from "react-i18next";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
@@ -9,7 +8,7 @@ import { Button, MenuItem, Select, TextField } from "@mui/material";
 const SignUpCompanies = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const options = [{ value: "+351", name: "PT +351" }];
+  const options = [{ value: "+351", name: "+351" }];
   const [formData, setFormData] = useState({
     account: "Commercial",
     name: "",
@@ -33,22 +32,21 @@ const SignUpCompanies = () => {
     e.preventDefault();
     try {
       if (
-        formData.name == "" ||
-        formData.email == "" ||
-        formData.phone == "" ||
-        formData.address == "" ||
-        formData.establishmentName == "" ||
-        formData.password == "" ||
-        formData.location == ""
+        formData.name === "" ||
+        formData.email === "" ||
+        formData.phone === "" ||
+        formData.address === "" ||
+        formData.establishmentName === "" ||
+        formData.password === "" ||
+        formData.location === ""
       ) {
-        toast.error("Tem que preencher todos os dados. Tente novamente.");
+        toast.error(t("text.dataFill"));
       } else {
         createUser(formData);
         navigate("/");
       }
     } catch (error: any) {
-      toast.error("erro" + error);
-      console.log(error);
+      toast.error(t("messages.generalError"));
     }
   };
   return (
@@ -58,13 +56,24 @@ const SignUpCompanies = () => {
       </div>
       <div className="padding-top-3 padding-bottom-3 txt-align-center">
         <div>
-          <TextField label="E-mail" id="email" onChange={onChange} />
-        </div>
-        <div className="padding-top-3">
-          <TextField label={t("text.name")} id="name" onChange={onChange} />
+          <TextField
+            className="input"
+            label="E-mail"
+            id="email"
+            onChange={onChange}
+          />
         </div>
         <div className="padding-top-3">
           <TextField
+            className="input"
+            label={t("text.name")}
+            id="name"
+            onChange={onChange}
+          />
+        </div>
+        <div className="padding-top-3">
+          <TextField
+            className="input"
             label={t("text.establishmentName")}
             id="establishmentName"
             onChange={onChange}
@@ -78,21 +87,33 @@ const SignUpCompanies = () => {
               </MenuItem>
             ))}
           </Select>
-          <TextField label={t("text.phone")} id="phone" onChange={onChange} />
+          <TextField
+            className="input-phone"
+            label={t("text.phone")}
+            id="phone"
+            onChange={onChange}
+          />
         </div>
         <div className="padding-top-3">
           <TextField
+            className="input"
             label={t("text.address")}
             id="address"
             onChange={onChange}
           />
         </div>
         <div className="padding-top-3">
-          <TextField label="Localidade" id="location" onChange={onChange} />
+          <TextField
+            className="input"
+            label="Localidade"
+            id="location"
+            onChange={onChange}
+          />
         </div>
         <div className="padding-top-3">
           <TextField
-            label="password"
+            className="input"
+            label="Password"
             id="password"
             type="password"
             onChange={onChange}

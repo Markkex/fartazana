@@ -48,6 +48,7 @@ const SignIn = () => {
           <div className="padding-top-3">
             <TextField
               label="E-mail"
+              className="input"
               type="email"
               id="email"
               onChange={onChange}
@@ -57,6 +58,7 @@ const SignIn = () => {
           <div className="padding-top-3">
             <TextField
               label="Password"
+              className="input"
               type="password"
               id="password"
               onChange={onChange}

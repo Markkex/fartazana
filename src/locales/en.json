@@ -16,7 +16,9 @@
         "signInCompanies": "Wanna publish your business with us? Create your account here.", 
         "createAccount": "Create your account", 
         "returnToLogin": "Return to login page", 
-        "commerceCreate": "Create your account for your business!"
+        "commerceCreate": "Create your account for your business!",
+        "dataFill": "You need to fill all the information"
+        
         
     }, 
     "button": {

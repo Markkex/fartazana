@@ -1,8 +1,8 @@
 import { UserActionType } from "./UserActionTypes";
 import { Action } from "./UserActions";
-import UserState from "../../types/inteface";
+import ReduxState from "../../types/inteface";
 
-const initialState: UserState = {
+const initialState: ReduxState = {
   user: undefined,
   language: "pt",
 };

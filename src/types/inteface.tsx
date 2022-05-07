@@ -5,7 +5,18 @@ interface User {
   phone: string;
 }
 
-export default interface UserState {
-  user: User[] | undefined;
-  language: string;
+interface Restaurants {
+  account: string;
+  address: string;
+  email: string;
+  establishmentName: string;
+  location: string;
+  name: string;
+  phone: string;
+}
+
+export default interface ReduxState {
+  user?: User[] | undefined;
+  language?: string;
+  restaurants?: Restaurants[] | undefined;
 }

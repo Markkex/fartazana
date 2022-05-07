@@ -9,40 +9,12 @@ body {
 }
 
 /*Frameworked css*/
-button {
-  padding: 15px 15px;
-  border: 1px solid black;
-  border-radius: 4px;
-  color: tomato;
-  background-color: rgb(red, green, blue);
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1rem;
-  cursor: pointer;
+.input {
+  width: 350px;
 }
 
-.button--logout {
-  background-color: black;
-}
-
-select {
-  padding: 15px 15px;
-  border: 1px solid black;
-  border-radius: 4px;
-  background-color: rgb(red, green, blue);
-  text-align: center;
-  text-decoration: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-input {
-  padding: 10px 15px;
-  height: 2rem;
-  width: 15rem;
-  border-radius: 4px;
-  border: 2px solid black;
+.input-phone {
+  width: 270px;
 }
 
 .input-disabled {
@@ -80,6 +52,10 @@ input {
 
 .margin-top-3 {
   margin-top: 30px;
+}
+
+.margin-top-2 {
+  margin-top: 20px;
 }
 
 .txt-align-center {
@@ -233,6 +209,7 @@ input {
   justify-content: center;
   padding: 10px;
 }
+
 .sign-up-companies {
   height: 100vh;
 }

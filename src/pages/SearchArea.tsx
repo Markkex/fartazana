@@ -5,23 +5,51 @@ import { getAuth } from "firebase/auth";
 import { getUser } from "../State/User/UserActionsCreators";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { getRestaurants } from "../State/Restaurants/RestaurantsActionCreators";
 
 const SearchArea = () => {
   const auth = getAuth();
+  let locations: any = [];
+  let filteredArray: any = [];
+  let objectArray: any = [];
 
+  const user = useSelector((state: any) => state.user.user);
+  const restaurants = useSelector(
+    (state: any) => state.restaurants.restaurants
+  );
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state: any) => state.user.user);
+
   const { t } = useTranslation();
+
   useEffect(() => {
     const getUserCredentials = async () => {
       const userData = await getUser();
       dispatch({ type: "GET_USER", payload: userData });
     };
+
     getUserCredentials();
-  }, [auth]);
+  }, [auth, dispatch]);
+
+  useEffect(() => {
+    const loadRestaurants = async () => {
+      const restaurantsData = await getRestaurants();
+      dispatch({ type: "GET_RESTAURANTS", payload: restaurantsData });
+    };
+    loadRestaurants();
+  }, [user]);
+
+  restaurants.map((restaurant: any) => {
+    filteredArray.push(restaurant.location);
+  });
+
+  objectArray = filteredArray.filter(function (item: any, pos: any) {
+    return filteredArray.indexOf(item) == pos;
+  });
+
+  locations = Object.assign(objectArray.map((k: any) => ({ location: k })));
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -35,7 +63,6 @@ const SearchArea = () => {
   const onChange = (e: any) => {
     setArea(e.target.value);
   };
-
   return (
     <div className="search-area">
       <div className="bold-text area-text">
@@ -46,20 +73,25 @@ const SearchArea = () => {
       </div>
       <div className="bold-text area-text">{t("text.areaRequest")}</div>
       <div className="form-search-area">
-        <TextField
-          label={t("text.areaOfResidence")}
-          value={area}
+        <InputLabel id="demo-simple-select-label">
+          {t("text.areaOfResidence")}
+        </InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          label="Area"
           onChange={onChange}
-          fullWidth
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          onClick={onSubmit}
-          className="padding-top-3"
+          value={area}
+          className="input"
         >
-          {t("button.search")}
-        </Button>
+          {locations.map((location: any) => (
+            <MenuItem value={location.location}>{location.location}</MenuItem>
+          ))}
+        </Select>
+        <div className="margin-top-2">
+          <Button type="submit" variant="contained" onClick={onSubmit}>
+            {t("button.search")}
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -46,6 +46,7 @@ const SignUp = () => {
             <div className="padding-top-1">
               <TextField
                 label={t("text.name")}
+                className="input"
                 type="text"
                 id="name"
                 onChange={onChange}
@@ -54,6 +55,7 @@ const SignUp = () => {
             <div className="padding-top-1">
               <TextField
                 label="E-mail"
+                className="input"
                 type="email"
                 id="email"
                 onChange={onChange}
@@ -69,6 +71,7 @@ const SignUp = () => {
               </Select>
               <TextField
                 label={t("text.phone")}
+                className="input-phone"
                 type="phone"
                 id="phone"
                 onChange={onChange}
@@ -78,6 +81,7 @@ const SignUp = () => {
               <TextField
                 label="Password"
                 type="password"
+                className="input"
                 id="password"
                 onChange={onChange}
               />

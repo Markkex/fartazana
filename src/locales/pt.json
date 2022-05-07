@@ -16,7 +16,9 @@
         "signInCompanies": "Quer publicar o seu negócio conosco? Crie já a sua conta." , 
         "createAccount": "Cria a tua conta", 
         "returnToLogin": "Voltar à página inicial", 
-        "commerceCreate": "Cria conta para o teu comércio!"
+        "commerceCreate": "Cria conta para o teu comércio!",
+        "dataFill": "Tem que preencher todos os dados"
+        
         
         
     }, 

@@ -104,6 +104,7 @@ const Profile: FC = () => {
             <TextField
               id="formDataName"
               label={t("text.name")}
+              className="input"
               variant="outlined"
               value={formDataName!}
               disabled={!changeDetails}
@@ -119,6 +120,7 @@ const Profile: FC = () => {
             <TextField
               id="formDataPhone"
               label={t("text.phone")}
+              className="input"
               variant="outlined"
               value={formDataPhone!}
               disabled={!changeDetails}
@@ -129,6 +131,7 @@ const Profile: FC = () => {
               id="formDataEmail"
               label="E-mail"
               variant="outlined"
+              className="input"
               value={formDataEmail!}
               disabled
               onChange={onChange}

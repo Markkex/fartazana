@@ -64,6 +64,7 @@ const Navbar = () => {
                   <Select defaultValue={language}>
                     {languagesAvalilable.map((languageAvailable) => (
                       <MenuItem
+                        key={languageAvailable.value}
                         value={languageAvailable.value}
                         onClick={() => changeLanguage(languageAvailable.value)}
                       >

@@ -5,15 +5,17 @@ import { getAuth } from "firebase/auth";
 import { getUser } from "../State/User/UserActionsCreators";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Button, InputLabel, MenuItem, Select } from "@mui/material";
 import { getRestaurants } from "../State/Restaurants/RestaurantsActionCreators";
+import Spinner from "../components/Spinner";
 
 const SearchArea = () => {
   const auth = getAuth();
-  let locations: any = [];
-  let filteredArray: any = [];
-  let objectArray: any = [];
+  let locations: any[] = [];
+  let filteredArray: any[] = [];
+  let objectArray: any[] = [];
 
+  const [loading, setLoading] = useState(false);
   const user = useSelector((state: any) => state.user.user);
   const restaurants = useSelector(
     (state: any) => state.restaurants.restaurants
@@ -25,6 +27,7 @@ const SearchArea = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
+    setLoading(true);
     const getUserCredentials = async () => {
       const userData = await getUser();
       dispatch({ type: "GET_USER", payload: userData });
@@ -39,9 +42,14 @@ const SearchArea = () => {
       dispatch({ type: "GET_RESTAURANTS", payload: restaurantsData });
     };
     loadRestaurants();
-  }, [user]);
+    setLoading(false);
+  }, [dispatch, user]);
 
-  restaurants.map((restaurant: any) => {
+  if (loading) {
+    <Spinner />;
+  }
+
+  restaurants?.map((restaurant: any) => {
     filteredArray.push(restaurant.location);
   });
 
@@ -49,7 +57,7 @@ const SearchArea = () => {
     return filteredArray.indexOf(item) == pos;
   });
 
-  locations = Object.assign(objectArray.map((k: any) => ({ location: k })));
+  locations = Object.assign(objectArray?.map((k: any) => ({ location: k })));
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
@@ -63,6 +71,7 @@ const SearchArea = () => {
   const onChange = (e: any) => {
     setArea(e.target.value);
   };
+
   return (
     <div className="search-area">
       <div className="bold-text area-text">
@@ -83,8 +92,10 @@ const SearchArea = () => {
           value={area}
           className="input"
         >
-          {locations.map((location: any) => (
-            <MenuItem value={location.location}>{location.location}</MenuItem>
+          {locations?.map((location: any) => (
+            <MenuItem key={location.location} value={location.location}>
+              {location.location}
+            </MenuItem>
           ))}
         </Select>
         <div className="margin-top-2">

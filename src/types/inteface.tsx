@@ -19,4 +19,5 @@ export default interface ReduxState {
   user?: User[] | undefined;
   language?: string;
   restaurants?: Restaurants[] | undefined;
+  location?: string;
 }

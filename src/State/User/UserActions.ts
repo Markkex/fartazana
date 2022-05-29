@@ -10,4 +10,9 @@ interface GetUserLanguage {
   payload: string;
 }
 
-export type Action = GetUserAction | GetUserLanguage;
+interface SetUserLocation {
+  type: UserActionType.SET_LOCATION;
+  payload: string;
+}
+
+export type Action = GetUserAction | GetUserLanguage | SetUserLocation;

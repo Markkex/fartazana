@@ -20,6 +20,8 @@ const SearchArea = () => {
   const restaurants = useSelector(
     (state: any) => state.restaurants.restaurants
   );
+  const location = useSelector((state: any) => state.user.location);
+
   const [area, setArea] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch();

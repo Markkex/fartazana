@@ -5,6 +5,7 @@ import ReduxState from "../../types/inteface";
 const initialState: ReduxState = {
   user: undefined,
   language: "pt",
+  location: "",
 };
 
 const userReducer = (state = initialState, action: Action) => {
@@ -18,6 +19,11 @@ const userReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         language: action.payload,
+      };
+    case UserActionType.SET_LOCATION:
+      return {
+        ...state,
+        location: action.payload,
       };
     default:
       return { ...state };
